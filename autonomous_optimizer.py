@@ -21,6 +21,7 @@ def make_observation(obj_value, obj_values, gradients, num_params, history_len):
 
     # Normalize and clip observation space
     observation /= 50
+    print("shape of observation :", np.shape(observation))
     return observation.clip(-1, 1)
 
 
