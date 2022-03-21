@@ -312,11 +312,11 @@ def plot_trajectories(trajectories, problem, get_weights, set_weights):
 
     for name, traj in data.items():
         plt.plot(traj[:, 0], traj[:, 1], label=name)
+        print("name :", name)
+        print("traj[:,0] :", traj[:,0])
+        print("traj[:,1] :", traj[:,1])
+        
     
-    print("name :", name)
-    print("traj[:,0] :", traj[:,0])
-    print("traj[:,1] :", traj[:,1])
-
     plt.title("Convex Quadratic Trajectory Plot")
     plt.plot(*get_weights(problem["model0"]), "go")
     plt.legend()
