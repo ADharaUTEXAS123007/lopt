@@ -67,6 +67,8 @@ def rosenbrock():
 
     # Initialization strategy: x_i = -2 if i is even, x_i = +2 if i is odd
     x0 = torch.tensor([-1.5 if i % 2 == 0 else 1.5 for i in range(num_vars)])
+    
+    print("x0 :", x0)
 
     def rosen(var):
         x = var.x
