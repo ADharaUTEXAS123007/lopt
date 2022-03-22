@@ -156,6 +156,7 @@ class Environment(gym.Env):
         # Update history of objective values and gradients with current objective
         # value and gradient.
         if len(self.obj_values) >= self.history_len:
+            print("adding history")
             self.obj_values.pop(-1)
             self.gradients.pop(-1)
         self.obj_values.insert(0, obj_value)
