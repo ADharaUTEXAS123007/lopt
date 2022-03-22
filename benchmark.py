@@ -66,13 +66,13 @@ def rosenbrock():
     num_vars = 2
 
     # Initialization strategy: x_i = -2 if i is even, x_i = +2 if i is odd
-    x0 = torch.tensor([1.5 if i % 2 == 0 else -1.5 for i in range(num_vars)])
+    x0 = torch.tensor([-1.5 if i % 2 == 0 else 1.5 for i in range(num_vars)])
     
     print("x0 :", x0)
 
     def rosen(var):
         x = var.x
-        return torch.sum(100.0 * (x[1:] - x[:-1] ** 2.0) ** 2.0 + (1 - x[:-1]) ** 2.0)
+        return -1.0*torch.sum(100.0 * (x[1:] - x[:-1] ** 2.0) ** 2.0 + (1 - x[:-1]) ** 2.0)
 
     # Optimum at all x_i = 1, giving f(x) = 0
     optimal_x = np.ones(num_vars)
