@@ -73,6 +73,7 @@ class AutonomousOptimizer(optim.Optimizer):
             self.num_params,
             self.history_len,
         )
+        print("obj_values :", self.obj_values)
         action, _states = self.policy.predict(observation, deterministic=True)
 
         # Update the parameters according to the policy
