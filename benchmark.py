@@ -72,7 +72,7 @@ def rosenbrock():
 
     def rosen(var):
         x = var.x
-        return -1.0*torch.sum(100.0 * (x[1:] - x[:-1] ** 2.0) ** 2.0 + (1 - x[:-1]) ** 2.0)
+        return torch.sum(100.0 * (x[1:] - x[:-1] ** 2.0) ** 2.0 + (1 - x[:-1]) ** 2.0)
 
     # Optimum at all x_i = 1, giving f(x) = 0
     optimal_x = np.ones(num_vars)
