@@ -14,7 +14,10 @@ from torch import nn
 from torch.nn import functional as F
 
 import autonomous_optimizer
-
+import sys
+sys.path.append('./SEGY_Wrapper/.')
+import SEGY_wrapper as wrap
+sys.path.append('./bruges/.') 
 
 class Variable(nn.Module):
     """A wrapper to turn a tensor of parameters into a module for optimization."""
@@ -24,6 +27,18 @@ class Variable(nn.Module):
         super().__init__()
         self.x = nn.Parameter(data)
 
+def avo():
+    """
+    avo objective function
+    """
+    
+    
+    return {
+        "model0": Variable(x0),
+        "obj_function": rosen,
+        "optimal_x": optimal_x,
+        "optimal_val": optimal_val,
+    }
 
 def convex_quadratic():
     """
