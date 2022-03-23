@@ -18,6 +18,9 @@ import sys
 sys.path.append('./SEGY_Wrapper/.')
 import SEGY_wrapper as wrap
 sys.path.append('./bruges/.') 
+from bruges.reflection import reflection as avo
+from bruges.filters import wavelets as wav 
+from torch.nn.functional import conv1d
 
 class Variable(nn.Module):
     """A wrapper to turn a tensor of parameters into a module for optimization."""
@@ -27,15 +30,33 @@ class Variable(nn.Module):
         super().__init__()
         self.x = nn.Parameter(data)
 
-def avo():
+def avoObj():
     """
     avo objective function
     """
+    zpall = wrap.Segy2Numpy('initial_zp.sgy')
     
-    
+    def cost_func():
+        tr1 = zpall*0
+        reflectivity = zpall[:-1,:]*0
+        
+        for i in range(zpall.shape[1]):
+            zp = zpall[:,i]
+            zp2 = zp[1:]
+            zp1 = zp[:-1]
+            reflect = (zp1 - zp2)/(zp2 + zp1)
+            reflectivity[:,i] = reflect
+            wavelet = wav.ricker(0.06, 2e-3, 30)
+            wavelet = wavelet*100
+            wavelet = torch.tensor(wavelet).unsqueeze(dim=0).unsqueeze(dim=0).float()
+            reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
+            reflect = torch.unsqueeze(reflect,dim=0)
+            synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
+            
+ 
     return {
         "model0": Variable(x0),
-        "obj_function": rosen,
+        "obj_function": avo,
         "optimal_x": optimal_x,
         "optimal_val": optimal_val,
     }
