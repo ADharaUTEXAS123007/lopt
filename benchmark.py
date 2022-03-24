@@ -80,7 +80,7 @@ def avoObj():
         #     synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
         
             
-    iv = avof(Variable(x0)).item()
+    iv = avof(Variable(x0))
     print("iv :", np.shape(iv))
     
     return {
