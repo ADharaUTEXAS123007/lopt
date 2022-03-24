@@ -34,7 +34,8 @@ def avoObj():
     """
     avo objective function
     """
-    zpall = wrap.Segy2Numpy('initial_zp.sgy')
+    x0 = np.load('initial.npy')
+    x0 = torch.tensor(x0)
     
     def cost_func():
         tr1 = zpall*0
@@ -56,10 +57,7 @@ def avoObj():
  
     return {
         "model0": Variable(x0),
-        "obj_function": avo,
-        "optimal_x": optimal_x,
-        "optimal_val": optimal_val,
-    }
+     }
 
 def convex_quadratic():
     """
