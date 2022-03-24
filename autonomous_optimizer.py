@@ -146,6 +146,7 @@ class Environment(gym.Env):
         with torch.enable_grad():
             self.model.zero_grad()
             obj_value = self.obj_function(self.model)
+            print("obj_value :", obj_value)
             obj_value.backward()
             
         print("p grad :", p.grad)    
