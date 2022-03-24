@@ -37,6 +37,8 @@ def avoObj():
     x0 = np.load('initial.npy')
     x0 = torch.tensor(x0)
     
+    print("x0 :", x0)
+    
     # def cost_func():
     #     tr1 = zpall*0
     #     reflectivity = zpall[:-1,:]*0
