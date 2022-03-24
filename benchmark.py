@@ -66,8 +66,8 @@ def avoObj():
             dobs = torch.transpose(dobs,0,1)
             dobs = torch.unsqueeze(dobs,0)
             print("dobs shape :", np.shape(dobs))
-        
-        return synth
+            
+        return F.mse_loss(synth, dobs)
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
         
@@ -86,7 +86,7 @@ def avoObj():
         
             
     iv = avof(Variable(x0))
-    print("iv :", np.shape(iv))
+    print("iv :", iv)
     
     return {
         "model0": Variable(x0),
