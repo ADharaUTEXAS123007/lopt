@@ -64,7 +64,7 @@ def avoObj():
             
             dobs = torch.tensor(np.load('seis.npy'))
             dobs = torch.transpose(dobs,0,1)
-            dobs = torch.unsquueze(dobs,0)
+            dobs = torch.unsqueeze(dobs,0)
             print("dobs shape :", np.shape(dobs))
         
         return synth
