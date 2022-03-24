@@ -147,6 +147,7 @@ class Environment(gym.Env):
 
         # Calculate the new objective value
         with torch.enable_grad():
+            print("self.model :", np.shape(self.model))
             self.model.zero_grad()
             obj_value = self.obj_function(self.model)
             print("obj_value :", obj_value)
