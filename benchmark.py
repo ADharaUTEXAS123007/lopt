@@ -36,6 +36,7 @@ def avoObj():
     """
     x0 = np.load('initial.npy')
     x0 = torch.tensor(x0)
+    x0.requires_grad = True
     
     print("x0 :", x0)
     
@@ -66,8 +67,7 @@ def avoObj():
             reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
             reflect = torch.unsqueeze(reflect,dim=0)
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
-            
- 
+
         return F.mse_loss(synth, dobs)
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
