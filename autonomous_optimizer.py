@@ -154,7 +154,7 @@ class Environment(gym.Env):
             obj_value.backward()
             
         for p in self.model.parameters():
-            print("P GRAD :", p.grad) 
+            print("P GRAD :", p) 
 
         # Calculate the current gradient and flatten it
         current_grad = torch.cat(
