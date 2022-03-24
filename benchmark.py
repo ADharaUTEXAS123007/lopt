@@ -69,6 +69,8 @@ def avoObj():
             
             reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
             reflect = torch.unsqueeze(reflect,dim=0)
+            
+            print("reflect device :", reflect.get_device())
             #wavelet = wavelet.cuda(reflect.get_device())
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
