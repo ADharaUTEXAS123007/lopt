@@ -43,6 +43,7 @@ def avoObj():
     dobs = torch.tensor(np.load('seis.npy'))
     dobs = torch.transpose(dobs,0,1)
     dobs = torch.unsqueeze(dobs,0)
+    dobs.requires_grad = True
     print("dobs shape :", np.shape(dobs))
     
     def avof(var):
