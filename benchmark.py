@@ -70,7 +70,7 @@ def avoObj():
             reflect = torch.unsqueeze(reflect,dim=0)
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
 
-        return F.mse_loss(synth, dobs)
+        return zpall
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
         
