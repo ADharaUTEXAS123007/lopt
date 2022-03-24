@@ -64,7 +64,7 @@ def avoObj():
     return {
         "model0": Variable(x0),
         "obj_function": avof,
-        "iv": iv
+        "iv": iv,
      }
 
 def convex_quadratic():
