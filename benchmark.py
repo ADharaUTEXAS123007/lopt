@@ -49,10 +49,10 @@ def avoObj():
     
     def avof(var):
         x = var.x
-        x = torch.transpose(x,0,1)
+        #x = torch.transpose(x,0,1)
         print("shape of x :", np.shape(x))
         
-        zpall = torch.unsqueeze(x,0)
+        zpall = torch.unsqueeze(x,1)
         tr1 = zpall*0
         reflectivity = zpall[:-1,:]*0
         
