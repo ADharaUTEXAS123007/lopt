@@ -41,6 +41,7 @@ def avoObj():
     
     def avof(var):
         x = var.x
+        x = torch.transpose(x,0,1)
         print("shape of x :", np.shape(x))
         return torch.sum(x)
         # tr1 = zpall*0
