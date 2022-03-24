@@ -35,7 +35,7 @@ def avoObj():
     avo objective function
     """
     x0 = np.load('initial.npy')
-    x0 = torch.tensor(x0)
+    x0 = torch.tensor(x0[0,:])
     x0.requires_grad = True
     
     print("x0 :", x0)
