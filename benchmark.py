@@ -39,6 +39,11 @@ def avoObj():
     
     print("x0 :", x0)
     
+    dobs = torch.tensor(np.load('seis.npy'))
+    dobs = torch.transpose(dobs,0,1)
+    dobs = torch.unsqueeze(dobs,0)
+    print("dobs shape :", np.shape(dobs))
+    
     def avof(var):
         x = var.x
         x = torch.transpose(x,0,1)
@@ -62,11 +67,7 @@ def avoObj():
             reflect = torch.unsqueeze(reflect,dim=0)
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
-            dobs = torch.tensor(np.load('seis.npy'))
-            dobs = torch.transpose(dobs,0,1)
-            dobs = torch.unsqueeze(dobs,0)
-            print("dobs shape :", np.shape(dobs))
-            
+ 
         return F.mse_loss(synth, dobs)
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
@@ -92,6 +93,7 @@ def avoObj():
         "model0": Variable(x0),
         "obj_function": avof,
         "iv": iv,
+        "dobs" : dobs,
      }
 
 def convex_quadratic():
