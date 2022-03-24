@@ -39,6 +39,7 @@ def avoObj():
     x0.requires_grad = True
     
     print("x0 :", x0)
+    print("x0 shape :", np.shape(x0))
     
     dobs = torch.tensor(np.load('seis.npy'))
     dobs = torch.transpose(dobs,0,1)
