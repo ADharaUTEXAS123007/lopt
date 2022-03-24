@@ -39,26 +39,29 @@ def avoObj():
     
     print("x0 :", x0)
     
-    # def cost_func():
-    #     tr1 = zpall*0
-    #     reflectivity = zpall[:-1,:]*0
+    def avof(var):
+        x = var.x
+        return torch.sum(x)
+        # tr1 = zpall*0
+        # reflectivity = zpall[:-1,:]*0
         
-    #     for i in range(zpall.shape[1]):
-    #         zp = zpall[:,i]
-    #         zp2 = zp[1:]
-    #         zp1 = zp[:-1]
-    #         reflect = (zp1 - zp2)/(zp2 + zp1)
-    #         reflectivity[:,i] = reflect
-    #         wavelet = wav.ricker(0.06, 2e-3, 30)
-    #         wavelet = wavelet*100
-    #         wavelet = torch.tensor(wavelet).unsqueeze(dim=0).unsqueeze(dim=0).float()
-    #         reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
-    #         reflect = torch.unsqueeze(reflect,dim=0)
-    #         synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
+        # for i in range(zpall.shape[1]):
+        #     zp = zpall[:,i]
+        #     zp2 = zp[1:]
+        #     zp1 = zp[:-1]
+        #     reflect = (zp1 - zp2)/(zp2 + zp1)
+        #     reflectivity[:,i] = reflect
+        #     wavelet = wav.ricker(0.06, 2e-3, 30)
+        #     wavelet = wavelet*100
+        #     wavelet = torch.tensor(wavelet).unsqueeze(dim=0).unsqueeze(dim=0).float()
+        #     reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
+        #     reflect = torch.unsqueeze(reflect,dim=0)
+        #     synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
  
     return {
         "model0": Variable(x0),
+        "obj_function": avof,
      }
 
 def convex_quadratic():
