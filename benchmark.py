@@ -141,6 +141,7 @@ def rosenbrock():
     x0 = torch.tensor([-1.5 if i % 2 == 0 else 1.5 for i in range(num_vars)])
     
     print("x0 :", x0)
+    print("shape of x0:", np.shape(x0))
 
     def rosen(var):
         x = var.x
