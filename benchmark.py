@@ -41,6 +41,7 @@ def avoObj():
     
     def avof(var):
         x = var.x
+        print("shape of x :", np.shape(x))
         return torch.sum(x)
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
@@ -57,6 +58,7 @@ def avoObj():
         #     reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
         #     reflect = torch.unsqueeze(reflect,dim=0)
         #     synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
+        
             
     iv = avof(Variable(x0)).item()
     print("iv :", iv)
