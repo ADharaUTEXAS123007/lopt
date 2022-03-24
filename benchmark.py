@@ -47,6 +47,10 @@ def avoObj():
     dobs.requires_grad = True
     print("dobs shape :", np.shape(dobs))
     
+    wavelet = wav.ricker(0.06,2e-3,30)
+    wavelet = wavelet*100
+    wavelet = torch.tensor(wavelet).unsqueeze(dim=0).unsqueeze(dim=0).float()
+    
     def avof(var):
         x = var.x
         #x = torch.transpose(x,0,1)
@@ -63,9 +67,6 @@ def avoObj():
             zp1 = zp[:-1]
             reflect = (zp1 - zp2)/(zp2 + zp1)
             reflectivity[:,i] = reflect
-            wavelet = wav.ricker(0.06,2e-3,30)
-            wavelet = wavelet*100
-            wavelet = torch.tensor(wavelet).unsqueeze(dim=0).unsqueeze(dim=0).float()
             
             reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
             reflect = torch.unsqueeze(reflect,dim=0)
