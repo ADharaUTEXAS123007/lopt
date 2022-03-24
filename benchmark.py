@@ -75,7 +75,7 @@ def avoObj():
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
         print("shape of synth :", synth)
-        return torch.sum(reflectivity)
+        return F.mse_loss(synth,dobs)
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
         
