@@ -56,6 +56,7 @@ def avoObj():
         tr1 = zpall*0
         reflectivity = zpall[:-1,:]*0
         
+        print("shape of zpall :", np.shape(zpall))
         for i in range(zpall.shape[1]):
             zp = zpall[:,i]
             zp2 = zp[1:]
