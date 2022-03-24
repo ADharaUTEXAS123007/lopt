@@ -61,6 +61,9 @@ def avoObj():
             reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
             reflect = torch.unsqueeze(reflect,dim=0)
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
+            
+            dobs = torch.tensor(np.load('seis.npy'))
+            print("dobs shape :", np.shape(dobs))
         
         return synth
         # tr1 = zpall*0
