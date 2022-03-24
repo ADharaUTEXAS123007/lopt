@@ -141,6 +141,7 @@ class Environment(gym.Env):
         for p in self.model.parameters():
             print("p :", p)
             delta_p = action[param_counter : param_counter + p.numel()]
+            print("delta_p :", delta_p)
             p.add_(delta_p.reshape(p.shape))
             param_counter += p.numel()
 
