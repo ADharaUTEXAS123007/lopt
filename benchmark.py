@@ -63,7 +63,7 @@ def avoObj():
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
             dobs = torch.tensor(np.load('seis.npy'))
-            dobs = torch.tranpose(dobs,0,1)
+            dobs = torch.transpose(dobs,0,1)
             dobs = torch.unsquueze(dobs,0)
             print("dobs shape :", np.shape(dobs))
         
