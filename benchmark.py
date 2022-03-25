@@ -44,7 +44,7 @@ def avoObj():
     dobs = torch.tensor(np.load('seis.npy'))
     dobs = torch.transpose(dobs,0,1)
     dobs = torch.unsqueeze(dobs,0)
-    dobs.requires_grad = True
+    #dobs.requires_grad = True
     print("dobs shape :", np.shape(dobs))
     
     wavelet = wav.ricker(0.06,2e-3,30)
@@ -76,7 +76,7 @@ def avoObj():
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
         print("shape of synth :", synth)
-        return torch.sum(synth)
+        return F.mse_loss(dobs,synth)
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
         
