@@ -407,6 +407,16 @@ def plot_trajectories(trajectories, problem, get_weights, set_weights):
     plt.plot()
     plt.show()
 
+def get_trajectories(trajectories, problem, get_weights, set_weights):
+    
+    data = {}
+    for name, traj in trajectories.items():
+        data[name] = np.array([get_weights(model) for model in traj])
+        
+    for name, traj in data.items():
+        print("shape of traj :", np.shape(traj))
+        
+    
 
 '''def tune_algos(
     dataset,
