@@ -68,7 +68,7 @@ def avoObj():
             reflect = (zp1 - zp2)/(zp2 + zp1)
             reflectivity[:,i] = reflect
             
-            reflect = torch.tensor(reflect).unsqueeze(dim=0).float()
+            reflect = reflect.unsqueeze(dim=0).float()
             reflect = torch.unsqueeze(reflect,dim=0)
             
             print("reflect device :", reflect.get_device())
@@ -76,7 +76,7 @@ def avoObj():
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
         print("shape of synth :", synth)
-        return torch.sum(reflectivity)
+        return torch.sum(reflect)
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
         
