@@ -137,25 +137,22 @@ class Environment(gym.Env):
         # Update the parameters according to the action
         action = torch.from_numpy(action)
         param_counter = 0
-        print("model parameters :", self.model.parameters())
+        #print("model parameters :", self.model.parameters())
         for p in self.model.parameters():
-            print("p :", p)
+            #print("p :", p)
             delta_p = action[param_counter : param_counter + p.numel()]
-            print("delta_p :", delta_p)
+            #print("delta_p :", delta_p)
             p.add_(delta_p.reshape(p.shape))
             param_counter += p.numel()
 
         # Calculate the new objective value
         with torch.enable_grad():
-            print("self.model :", np.shape(self.model))
+            #print("self.model :", np.shape(self.model))
             self.model.zero_grad()
             obj_value = self.obj_function(self.model)
-            print("obj_value :", obj_value)
+            #print("obj_value :", obj_value)
             obj_value.backward()
             
-        for p in self.model.parameters():
-            print("P GRAD :", p) 
-
         # Calculate the current gradient and flatten it
         current_grad = torch.cat(
             [p.grad.flatten() for p in self.model.parameters()]
@@ -164,7 +161,7 @@ class Environment(gym.Env):
         # Update history of objective values and gradients with current objective
         # value and gradient.
         if len(self.obj_values) >= self.history_len:
-            print("adding history")
+            #print("adding history")
             self.obj_values.pop(-1)
             self.gradients.pop(-1)
         self.obj_values.insert(0, obj_value)

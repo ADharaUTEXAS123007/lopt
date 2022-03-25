@@ -45,7 +45,9 @@ def avoObj():
     dobs = torch.transpose(dobs,0,1)
     dobs = torch.unsqueeze(dobs,0)
     #dobs.requires_grad = True
-    print("dobs shape :", np.shape(dobs))
+    #print("dobs shape :", np.shape(dobs))
+    
+    opval = np.load('true.npy')
     
     wavelet = wav.ricker(0.06,2e-3,30)
     wavelet = wavelet*100
@@ -54,13 +56,13 @@ def avoObj():
     def avof(var):
         x = var.x
         #x = torch.transpose(x,0,1)
-        print("shape of x :", np.shape(x))
+        #print("shape of x :", np.shape(x))
         
         zpall = torch.unsqueeze(x,1)
         tr1 = zpall*0
         reflectivity = zpall[:-1,:]*0
         
-        print("shape of zpall :", np.shape(zpall))
+        #print("shape of zpall :", np.shape(zpall))
         for i in range(zpall.shape[1]):
             zp = zpall[:,i]
             zp2 = zp[1:]
@@ -71,11 +73,11 @@ def avoObj():
             reflect = reflect.unsqueeze(dim=0).float()
             reflect = torch.unsqueeze(reflect,dim=0)
             
-            print("reflect device :", reflect.get_device())
+            #print("reflect device :", reflect.get_device())
             #wavelet = wavelet.cuda(reflect.get_device())
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
-        print("shape of synth :", synth)
+        #print("shape of synth :", synth)
         return F.mse_loss(dobs,synth)
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
@@ -102,6 +104,7 @@ def avoObj():
         "obj_function": avof,
         "iv": iv,
         "dobs" : dobs,
+        "optimal_val": opval,
      }
 
 def convex_quadratic():
