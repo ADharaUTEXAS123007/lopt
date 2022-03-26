@@ -67,6 +67,8 @@ class AutonomousOptimizer(optim.Optimizer):
 
         # Run policy
         #print("shape of gradients :", np.shape(self.gradients))
+        print("shape of gradients :", len(self.gradients))
+        print("shape of obj_value :", len(self.obj_values))
         observation = make_observation(
             obj_value.item(),
             self.obj_values,
