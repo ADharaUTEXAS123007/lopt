@@ -168,6 +168,9 @@ class Environment(gym.Env):
             self.gradients.pop(-1)
         self.obj_values.insert(0, obj_value)
         self.gradients.insert(0, current_grad)
+        
+        print("length of obj values :", len(self.obj_values))
+        print("length of gradients :", len(self.gradients))
 
         # Return observation, reward, done, and empty info
         observation = make_observation(
