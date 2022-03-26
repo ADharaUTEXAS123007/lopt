@@ -66,7 +66,7 @@ class AutonomousOptimizer(optim.Optimizer):
         self.gradients.insert(0, current_grad)
 
         # Run policy
-        print("shape of gradients :", np.shape(self.gradients))
+        #print("shape of gradients :", np.shape(self.gradients))
         observation = make_observation(
             obj_value.item(),
             self.obj_values,
@@ -74,6 +74,7 @@ class AutonomousOptimizer(optim.Optimizer):
             self.num_params,
             self.history_len,
         )
+        print("shape of observation :", np.shape(observation))
         print("obj_values :", self.obj_values)
         action, _states = self.policy.predict(observation, deterministic=True)
 
