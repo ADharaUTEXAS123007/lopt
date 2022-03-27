@@ -126,6 +126,7 @@ class Environment(gym.Env):
         res = np.random.choice(self.dataset)
         self.model = copy.deepcopy(res["model0"])
         self.obj_function = res["obj_function"]
+        self.dobs = copy.deepcopy(res["dobs"])
 
         self.obj_values = []
         self.gradients = []
@@ -157,7 +158,8 @@ class Environment(gym.Env):
             obj_value = self.obj_function(self.model)
             #print("obj_value :", obj_value)
             obj_value.backward()
-            
+          
+        print("shape of dobs :", np.shape(dobs))    
         # Calculate the current gradient and flatten it
         current_grad = torch.cat(
             [p.grad.flatten() for p in self.model.parameters()]
