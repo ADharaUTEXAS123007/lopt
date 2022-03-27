@@ -12,7 +12,7 @@ def make_observation(obj_value, obj_values, gradients, num_params, history_len):
     # Features is a matrix where the ith row is a concatenation of the difference
     # in the current objective value and that of the ith previous iterate as well
     # as the ith previous gradient.
-    dobs = load('seis.npy')
+    dobs = np.load('seis.npy')
     print("shape of dobs :", np.shape(dobs))
     observation = np.zeros((history_len, 1 + num_params), dtype="float32")
     observation[: len(obj_values), 0] = (
