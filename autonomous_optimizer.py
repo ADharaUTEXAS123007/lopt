@@ -20,7 +20,7 @@ def make_observation(obj_value, obj_values, gradients, num_params, history_len):
         observation[i, 1:] = grad.detach().numpy()
 
     # Normalize and clip observation space
-    observation /= 50
+    observation /= 25*498
     #print("shape of observation :", np.shape(observation))
     return observation.clip(-1, 1)
 
