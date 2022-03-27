@@ -159,7 +159,7 @@ class Environment(gym.Env):
             #print("obj_value :", obj_value)
             obj_value.backward()
           
-        print("shape of dobs :", np.shape(dobs))    
+        print("shape of dobs :", np.shape(self.dobs))    
         # Calculate the current gradient and flatten it
         current_grad = torch.cat(
             [p.grad.flatten() for p in self.model.parameters()]
