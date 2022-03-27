@@ -25,6 +25,7 @@ def make_observation(obj_value, obj_values, gradients, num_params, history_len):
     #observation /= 25*498
     observation /= 1
     #print("shape of observation :", np.shape(observation))
+    observation = np.transpose(dobs)
     
     return observation
 
