@@ -122,7 +122,8 @@ class Environment(gym.Env):
         self.observation_space = spaces.Box(
             low=-1,
             high=1,
-            shape=(self.history_len, 1 + self.num_params),
+            #shape=(self.history_len, 1 + self.num_params),
+            shape = (1, self.num_params),
             dtype=np.float32,
         )
 
