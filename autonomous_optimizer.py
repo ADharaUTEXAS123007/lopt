@@ -12,6 +12,8 @@ def make_observation(obj_value, obj_values, gradients, num_params, history_len):
     # Features is a matrix where the ith row is a concatenation of the difference
     # in the current objective value and that of the ith previous iterate as well
     # as the ith previous gradient.
+    dobs = load('seis.npy')
+    print("shape of dobs :", np.shape(dobs))
     observation = np.zeros((history_len, 1 + num_params), dtype="float32")
     observation[: len(obj_values), 0] = (
         obj_value - torch.tensor(obj_values).detach().numpy()
@@ -23,6 +25,7 @@ def make_observation(obj_value, obj_values, gradients, num_params, history_len):
     #observation /= 25*498
     observation /= 1
     #print("shape of observation :", np.shape(observation))
+    
     return observation
 
 
@@ -183,7 +186,7 @@ class Environment(gym.Env):
             self.obj_values,
             self.gradients,
             self.num_params,
-            self.history_len,
+            self.history_len,       
         )
         reward = -obj_value.item()
         done = self.current_step >= self.num_steps
