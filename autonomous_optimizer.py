@@ -20,9 +20,10 @@ def make_observation(obj_value, obj_values, gradients, num_params, history_len):
         observation[i, 1:] = grad.detach().numpy()
 
     # Normalize and clip observation space
-    observation /= 25*498
+    #observation /= 25*498
+    observation /= 1
     #print("shape of observation :", np.shape(observation))
-    return observation.clip(-1, 1)
+    return observation
 
 
 class AutonomousOptimizer(optim.Optimizer):
