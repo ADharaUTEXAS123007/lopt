@@ -15,6 +15,7 @@ def make_observation(obj_value, obj_values, gradients, current_values, num_param
     dobs = np.load('seis.npy')
     print("shape of dobs :", np.shape(dobs))
     current_values = current_values[0].detach().numpy()
+    current_values = np.expand_dims(current_values,0)
     print("current values :", current_values)
     observation = np.zeros((history_len, 1 + num_params), dtype="float32")
     observation[: len(obj_values), 0] = (
