@@ -148,8 +148,10 @@ class Environment(gym.Env):
         self.gradients = []
         self.current_values = []
         self.current_step = 0
+        
+        current_value = torch.cat([p.flatten() for p in self.model.parameters()]).flatten()
         print("shape of self model :", np.shape(self.model))
-        self.current_values.insert(0,self.model)
+        self.current_values[0] = current_value
 
     def reset(self):
         self._setup_episode()
