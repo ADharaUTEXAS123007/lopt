@@ -22,14 +22,13 @@ def make_observation(obj_value, obj_values, gradients, current_values, num_param
     )
     for i, grad in enumerate(gradients):
         observation[i, 1:] = grad.detach().numpy()
-        
-    
 
     # Normalize and clip observation space
     #observation /= 25*498
     observation /= 1
     #print("shape of observation :", np.shape(observation))
     observation = np.transpose(dobs)
+    observation = np.append(observation,current_values,axis=1)
     
     return observation
 
