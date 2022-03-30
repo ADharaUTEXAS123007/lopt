@@ -14,7 +14,7 @@ def make_observation(obj_value, obj_values, gradients, current_values, num_param
     # as the ith previous gradient.
     dobs = np.load('seis.npy')
     print("shape of dobs :", np.shape(dobs))
-    print("current values :", len(current_values))
+    print("current values :", current_values)
     observation = np.zeros((history_len, 1 + num_params), dtype="float32")
     observation[: len(obj_values), 0] = (
         obj_value - torch.tensor(obj_values).detach().numpy()
@@ -75,7 +75,8 @@ class AutonomousOptimizer(optim.Optimizer):
             self.gradients.pop(-1)
         self.obj_values.insert(0, obj_value)
         self.gradients.insert(0, current_grad)
-        self.current_values.insert(0, current_value)
+        #self.current_values.insert(0, current_value)
+        self.current_values = current_value
 
         # Run policy
         #print("shape of gradients :", np.shape(self.gradients))
@@ -143,7 +144,7 @@ class Environment(gym.Env):
 
         self.obj_values = []
         self.gradients = []
-        self.current_values = []
+        self.current_values = 0
         self.current_step = 0
 
     def reset(self):
@@ -193,8 +194,8 @@ class Environment(gym.Env):
             self.gradients.pop(-1)
         self.obj_values.insert(0, obj_value)
         self.gradients.insert(0, current_grad)
-        self.current_values.insert(0, current_value)
         
+        self.current_values = current_value
         #print("length of obj values :", len(self.obj_values))
         #print("length of gradients :", len(self.gradients))
 
