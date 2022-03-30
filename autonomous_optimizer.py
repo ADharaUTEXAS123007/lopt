@@ -8,12 +8,13 @@ from gym import spaces
 from torch import optim
 
 
-def make_observation(obj_value, obj_values, gradients, num_params, history_len):
+def make_observation(obj_value, obj_values, gradients, current_values, num_params, history_len):
     # Features is a matrix where the ith row is a concatenation of the difference
     # in the current objective value and that of the ith previous iterate as well
     # as the ith previous gradient.
     dobs = np.load('seis.npy')
     print("shape of dobs :", np.shape(dobs))
+    print("current values :", current_values)
     observation = np.zeros((history_len, 1 + num_params), dtype="float32")
     observation[: len(obj_values), 0] = (
         obj_value - torch.tensor(obj_values).detach().numpy()
@@ -61,6 +62,11 @@ class AutonomousOptimizer(optim.Optimizer):
         current_grad = torch.cat(
             [p.grad.flatten() for group in self.param_groups for p in group["params"]]
         ).flatten()
+        
+        # Current value 
+        current_value = torch.cat(
+            [p.flatten() for group in self.param_groups for p in group["params"]]
+        ).flatten() 
 
         # Update history of objective values and gradients with current objective
         # value and gradient.
@@ -78,6 +84,7 @@ class AutonomousOptimizer(optim.Optimizer):
             obj_value.item(),
             self.obj_values,
             self.gradients,
+            self.current_values,
             self.num_params,
             self.history_len,
         )
@@ -193,6 +200,7 @@ class Environment(gym.Env):
             obj_value.item(),
             self.obj_values,
             self.gradients,
+            self.current_value,
             self.num_params,
             self.history_len,       
         )
