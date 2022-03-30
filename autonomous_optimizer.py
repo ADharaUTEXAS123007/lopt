@@ -148,9 +148,9 @@ class Environment(gym.Env):
         # Update the parameters according to the action
         action = torch.from_numpy(action)
         param_counter = 0
-        print("model parameters :", len(self.model.parameters()))
+        #print("model parameters :", len(self.model.parameters()))
         for p in self.model.parameters():
-            #print("p :", p)
+            print("p :", p)
             delta_p = action[param_counter : param_counter + p.numel()]
             #print("delta_p :", delta_p)
             p.add_(delta_p.reshape(p.shape))
