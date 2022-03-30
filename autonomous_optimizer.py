@@ -184,7 +184,7 @@ class Environment(gym.Env):
             [p.flatten() for p in self.model.parameters()]
         ).flatten()
         
-        print("current_value :", current_value)
+        #print("current_value :", current_value)
 
         # Update history of objective values and gradients with current objective
         # value and gradient.
