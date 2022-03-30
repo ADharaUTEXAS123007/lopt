@@ -150,7 +150,7 @@ class Environment(gym.Env):
         param_counter = 0
         #print("model parameters :", len(self.model.parameters()))
         for p in self.model.parameters():
-            print("p :", p)
+            #print("p :", p)
             delta_p = action[param_counter : param_counter + p.numel()]
             #print("delta_p :", delta_p)
             p.add_(delta_p.reshape(p.shape))
@@ -169,6 +169,12 @@ class Environment(gym.Env):
         current_grad = torch.cat(
             [p.grad.flatten() for p in self.model.parameters()]
         ).flatten()
+        
+        current_value = torch.cat(
+            [p.flatten() for p in self.model.parameters()]
+        ).flatten()
+        
+        print("current_value :", current_value)
 
         # Update history of objective values and gradients with current objective
         # value and gradient.
