@@ -151,7 +151,7 @@ class Environment(gym.Env):
         
         current_value = torch.cat([p.flatten() for p in self.model.parameters()]).flatten()
         print("shape of self model :", np.shape(self.model))
-        self.current_values[0] = current_value
+        self.current_values.append(current_value)
 
     def reset(self):
         self._setup_episode()
