@@ -135,7 +135,7 @@ class Environment(gym.Env):
             low=-np.inf,
             high=np.inf,
             #shape=(self.history_len, 1 + self.num_params),
-            shape = (1, self.num_params),
+            shape = (2, self.num_params),
             dtype=np.float32,
         )
 
