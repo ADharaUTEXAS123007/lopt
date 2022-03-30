@@ -75,6 +75,7 @@ class AutonomousOptimizer(optim.Optimizer):
             self.gradients.pop(-1)
         self.obj_values.insert(0, obj_value)
         self.gradients.insert(0, current_grad)
+        self.current_values.insert(0, current_value)
 
         # Run policy
         #print("shape of gradients :", np.shape(self.gradients))
@@ -142,12 +143,13 @@ class Environment(gym.Env):
 
         self.obj_values = []
         self.gradients = []
+        self.current_values = []
         self.current_step = 0
 
     def reset(self):
         self._setup_episode()
         return make_observation(
-            None, self.obj_values, self.gradients, self.num_params, self.history_len
+            None, self.obj_values, self.gradients, self.current_values, self.num_params, self.history_len
         )
 
     @torch.no_grad()
@@ -191,6 +193,7 @@ class Environment(gym.Env):
             self.gradients.pop(-1)
         self.obj_values.insert(0, obj_value)
         self.gradients.insert(0, current_grad)
+        self.current_values.insert(0, current_value)
         
         #print("length of obj values :", len(self.obj_values))
         #print("length of gradients :", len(self.gradients))
