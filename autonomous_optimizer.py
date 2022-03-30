@@ -14,7 +14,7 @@ def make_observation(obj_value, obj_values, gradients, current_values, num_param
     # as the ith previous gradient.
     dobs = np.load('seis.npy')
     print("shape of dobs :", np.shape(dobs))
-    current_values = current_values.numpy()
+    current_values = current_values[0].numpy()
     print("current values :", current_values)
     observation = np.zeros((history_len, 1 + num_params), dtype="float32")
     observation[: len(obj_values), 0] = (
@@ -22,6 +22,8 @@ def make_observation(obj_value, obj_values, gradients, current_values, num_param
     )
     for i, grad in enumerate(gradients):
         observation[i, 1:] = grad.detach().numpy()
+        
+    
 
     # Normalize and clip observation space
     #observation /= 25*498
