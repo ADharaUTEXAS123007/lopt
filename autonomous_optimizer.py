@@ -203,7 +203,7 @@ class Environment(gym.Env):
             obj_value.item(),
             self.obj_values,
             self.gradients,
-            self.current_value,
+            self.current_values,
             self.num_params,
             self.history_len,       
         )
