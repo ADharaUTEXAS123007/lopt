@@ -152,7 +152,7 @@ class Environment(gym.Env):
         self.current_step = 0
         
         current_value = torch.cat([p.flatten() for p in self.model.parameters()]).flatten()
-        print("shape of self model :", np.shape(self.model))
+        #print("shape of self model :", np.shape(self.model))
         self.current_values.append(current_value)
 
     def reset(self):
@@ -219,6 +219,8 @@ class Environment(gym.Env):
         reward = -obj_value.item()
         done = self.current_step >= self.num_steps
         #done = obj_value.item() <= 2.0
+        print("obj value item :", obj_value.item())
+        
         info = {}
 
         self.current_step += 1
