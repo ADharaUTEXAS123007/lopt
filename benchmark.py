@@ -44,6 +44,8 @@ def avoObj():
     dobs = torch.tensor(np.load('seis.npy'))
     dobs = torch.transpose(dobs,0,1)
     dobs = torch.unsqueeze(dobs,0)
+    
+    dones = torch.ones(dobs.size())
     #dobs.requires_grad = True
     #print("dobs shape :", np.shape(dobs))
     
@@ -81,7 +83,7 @@ def avoObj():
             #synth = torch.div(synth,dobs)
     
         #print("shape of synth :", synth)
-        return F.mse_loss(dobs,synth)
+        return F.mse_loss(dones,torch.div(synth,dobs))
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
         
