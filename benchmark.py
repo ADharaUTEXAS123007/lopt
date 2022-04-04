@@ -77,6 +77,9 @@ def avoObj():
             #wavelet = wavelet.cuda(reflect.get_device())
             synth = conv1d(reflect, wavelet, padding=int(wavelet.shape[-1] / 2))
             
+            dobs = torch.div(dobs,dobs)
+            synth = torch.div(synth,dobs)
+    
         #print("shape of synth :", synth)
         return F.mse_loss(dobs,synth)
         # tr1 = zpall*0
