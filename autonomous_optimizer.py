@@ -218,8 +218,8 @@ class Environment(gym.Env):
             self.history_len,       
         )
         reward = -obj_value.item()
-        #done = self.current_step >= self.num_steps
-        done = obj_value.item() <= 2.0
+        done = self.current_step >= self.num_steps
+        #done = obj_value.item() <= 2.0
         print("obj value item :", obj_value.item())
         print("current step :", self.current_step)
         
