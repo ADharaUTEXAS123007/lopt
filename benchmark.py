@@ -83,7 +83,7 @@ def avoObj():
             #synth = torch.div(synth,dobs)
     
         #print("shape of synth :", synth)
-        return F.mse_loss(dones,torch.div(synth,dobs))
+        return F.l1_loss(dones,torch.div(synth,dobs))
         # tr1 = zpall*0
         # reflectivity = zpall[:-1,:]*0
         
