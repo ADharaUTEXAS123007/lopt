@@ -28,7 +28,7 @@ def make_observation(obj_value, obj_values, gradients, current_values, num_param
     #observation /= 25*498
     observation /= 1
     #print("shape of observation :", np.shape(observation))
-    observation = np.ones(np.shape(np.transpose(dobs)))
+    observation = np.transpose(dobs)
     #observation = np.append(observation,current_values,axis=0)
     #observation = np.expand_dims(observation, axis=0)
     #observation = current_values
@@ -135,8 +135,8 @@ class Environment(gym.Env):
             low=-1, high=1, shape=(self.num_params,), dtype=np.float32
         )
         self.observation_space = spaces.Box(
-            low=-np.inf,
-            high=np.inf,
+            low=-39,
+            high=34,
             #shape=(self.history_len, 1 + self.num_params),
             shape = (1, self.num_params),
             dtype=np.float32,
