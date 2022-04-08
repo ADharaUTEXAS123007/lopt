@@ -30,7 +30,7 @@ def make_observation(obj_value, obj_values, gradients, current_values, num_param
     observation /= 1
     #print("shape of observation :", np.shape(observation))
     observation = np.transpose(dobs)
-    observation = np.append(observation,current_values,axis=0)
+    #observation = np.append(observation,current_values,axis=0)
     #observation = np.expand_dims(observation, axis=0)
     #observation = current_values
     
@@ -139,7 +139,7 @@ class Environment(gym.Env):
             low=-39,
             high=34,
             #shape=(self.history_len, 1 + self.num_params),
-            shape = (2, self.num_params),
+            shape = (1, self.num_params),
             dtype=np.float32,
         )
 
