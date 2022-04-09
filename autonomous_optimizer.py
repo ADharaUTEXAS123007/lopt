@@ -30,7 +30,7 @@ def make_observation(obj_value, obj_values, gradients, current_values, num_param
     observation /= 1
     #print("shape of observation :", np.shape(observation))
     observation = np.transpose(dobs)
-    current_values = (current_values - 3.3049362)/0.52516
+    current_values = (current_values - np.mean(current_values))/np.std(current_values)
     observation = np.append(observation,current_values,axis=0)
     #observation = np.expand_dims(observation, axis=0)
     #observation = current_values
@@ -175,7 +175,7 @@ class Environment(gym.Env):
             #print("p :", p)
             delta_p = action[param_counter : param_counter + p.numel()]
             #print("delta_p :", delta_p)
-            p.add_(0.05*delta_p.reshape(p.shape))
+            p.add_(0.2*delta_p.reshape(p.shape))
             param_counter += p.numel()
 
         # Calculate the new objective value
