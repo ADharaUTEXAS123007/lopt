@@ -175,7 +175,7 @@ class Environment(gym.Env):
             #print("p :", p)
             delta_p = action[param_counter : param_counter + p.numel()]
             #print("delta_p :", delta_p)
-            p.add_(0.2*delta_p.reshape(p.shape))
+            p.add_(0.05*delta_p.reshape(p.shape))
             param_counter += p.numel()
 
         # Calculate the new objective value
