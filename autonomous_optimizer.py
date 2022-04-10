@@ -110,7 +110,7 @@ class AutonomousOptimizer(optim.Optimizer):
         for group in self.param_groups:
             for p in group["params"]:
                 delta_p = action[param_counter : param_counter + p.numel()]
-                p.add_(delta_p.reshape(p.shape))
+                #p.add_(delta_p.reshape(p.shape))
                 param_counter += p.numel()
 
         return obj_value
